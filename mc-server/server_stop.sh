@@ -1,10 +1,10 @@
 #!/bin/bash
 
-mcrcon -H localhost -P 25575 -p cUDj@0TySyyXEhktiFzFbxQ4bGJMOIMOxlr%vYq89qCoMVHWf@NTbUxdYBxfK3El "say Server stopping..."
+mcrcon -H localhost -P 25575 -p <RCON_PASSWORD> "say Server stopping..."
 
 sleep 5
 
-mcrcon -H localhost -P 25575 -p cUDj@0TySyyXEhktiFzFbxQ4bGJMOIMOxlr%vYq89qCoMVHWf@NTbUxdYBxfK3El stop
+mcrcon -H localhost -P 25575 -p <RCON_PASSWORD> stop
 
 while kill -0 $MAINPID 2>/dev/null
 do
