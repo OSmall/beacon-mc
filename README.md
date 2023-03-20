@@ -5,11 +5,10 @@ Host a small server that launches a big minecraft server and redirects the playe
 ## beacon server
 ### DDNS
 - if main server is alive, assign main server's IP to the domain
-- else assign beacon server's IP to the domain
+- else, assign beacon server's IP to the domain
 
 ### node-minecraft-protocol server
-- detects when a user tries to connect to the beacon server in Minecraft, and launches the main server
-
+- detects when a user tries to connect to the beacon server in Minecraft, and boots the main server EC2 instance using aws-cli
 
 ## main server
 ### MC Server
