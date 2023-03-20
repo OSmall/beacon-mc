@@ -4,8 +4,8 @@ Host a small server that launches a big minecraft server and redirects the playe
 
 ## beacon server
 ### DDNS
-- [ ] if main server is alive, assign main server's IP to the domain
-- [ ] else, assign beacon server's IP to the domain
+- [X] if main server is alive, assign main server's IP to the domain
+- [X] else, assign beacon server's IP to the domain
 
 ### node-minecraft-protocol server
 - [ ] detects when a user tries to connect to the beacon server in Minecraft, and boots the main server EC2 instance using aws-cli
@@ -14,7 +14,19 @@ Host a small server that launches a big minecraft server and redirects the playe
 ## main server
 ### MC Server
 - [x] boots on startup with a systemd service
-- [x] when service exits, safely shut down minecraft server with RCON
+- [x] when service stops, safely shut down minecraft server with RCON
+- [ ] when service stops, stop EC2 instance
+
+### AFK+ Plugin
+- [ ] [plugin link][AFK+]
+
+### EmptyServerStopper Plugin
+- [ ] [plugin link][EmptyServerStopper]
+
 
 ### SFTP Server
 - [ ] to access and edit server files
+
+
+[AFK+]: https://www.spigotmc.org/resources/afk.35065/
+[EmptyServerStopper]: https://www.spigotmc.org/resources/emptyserverstopper.19409/
