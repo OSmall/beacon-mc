@@ -9,6 +9,7 @@ Group=ec2-user
 WorkingDirectory=/opt/mc-server
 ExecStart=/opt/mc-server/server_start.sh
 ExecStop=/opt/mc-server/server_stop.sh
+Restart=on-failure
 
 [Install]
 WantedBy=default.target
