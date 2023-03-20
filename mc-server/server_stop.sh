@@ -10,3 +10,5 @@ while kill -0 $MAINPID 2>/dev/null
 do
   sleep 0.5
 done
+
+aws ec2 stop-instances --instance-ids <INSTANCE_ID>
