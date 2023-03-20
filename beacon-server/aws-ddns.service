@@ -1,0 +1,15 @@
+[Unit]
+Description=AWS Route53 Dynamic DNS
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/aws-ddns $UPDATE_DNS_FQDN $UPDATE_DNS_TTL $UPDATE_AWS_ZONE_ID $UPDATE_RECHECK_SECS
+Type=simple
+User=nobody
+Group=nogroup
+EnvironmentFile=/etc/aws-ddns.conf
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
