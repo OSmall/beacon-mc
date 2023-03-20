@@ -16,5 +16,5 @@ Host a small server that launches a big minecraft server and redirects the playe
 - [x] boots on startup with a systemd service
 - [x] when service exits, safely shut down minecraft server with RCON
 
-## SFTP Server
+### SFTP Server
 - [ ] to access and edit server files
