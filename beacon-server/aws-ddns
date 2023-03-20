@@ -96,5 +96,5 @@ EOF
 
     TS=$DNS_TTL # increase sleep after changing the DNS record
 
-	echo "Done. Request sent to update IP to: $THIS_IP ($DNS_FQDN)"
+	echo "Done. Request sent to update IP to: $NEW_IP ($DNS_FQDN)"
 done
