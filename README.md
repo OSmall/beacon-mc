@@ -15,7 +15,7 @@ Host a small server that launches a big minecraft server and redirects the playe
 ### MC Server
 - [x] boots on startup with a systemd service
 - [x] when service stops, safely shut down minecraft server with RCON
-- [ ] when service stops, stop EC2 instance
+- [x] when service stops, stop EC2 instance
 
 ### AFK+ Plugin
 - [ ] [plugin link][AFK+]
