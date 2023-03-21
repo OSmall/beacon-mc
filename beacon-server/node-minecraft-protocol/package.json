@@ -1,0 +1,15 @@
+{
+  "name": "beacon-mc",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oliver Small",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1338.0",
+    "minecraft-protocol": "^1.41.1"
+  }
+}
