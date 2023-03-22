@@ -20,10 +20,10 @@ Host a small server that launches a big minecraft server and redirects the playe
 - [x] when service stops, stop EC2 instance
 
 ### AFK+ Plugin
-- [ ] [plugin link][AFK+]
+- [x] [plugin link][AFK+]
 
 ### EmptyServerStopper Plugin
-- [ ] [plugin link][EmptyServerStopper]
+- [x] [plugin link][EmptyServerStopper]
 
 
 ### SFTP Server
