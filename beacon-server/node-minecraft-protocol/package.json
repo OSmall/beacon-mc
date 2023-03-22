@@ -9,7 +9,7 @@
   "author": "Oliver Small",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1338.0",
+    "@aws-sdk/client-ec2": "^3.295.0",
     "minecraft-protocol": "^1.41.1"
   }
 }
