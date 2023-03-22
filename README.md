@@ -11,7 +11,7 @@ Host a small server that launches a big minecraft server and redirects the playe
 - [x] detects when a user tries to connect to the beacon server in Minecraft, and boots the main server EC2 instance using aws-cli
 - [x] disconnects the player with the message that the main server is booting
 - [x] add a timeout for sending EC2 boot requests
-- [ ] make a systemd service
+- [x] make a systemd service
 
 ## main server
 ### MC Server

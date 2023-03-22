@@ -1,0 +1,14 @@
+[Unit]
+Description=node-minecraft-protocol beacon server to boot up main Minecraft server AWS EC2 instance when player joins.
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/beacon-mc
+ExecStart=/opt/beacon-mc/index.js
+User=ec2-user
+Group=ec2-user
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
