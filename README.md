@@ -8,8 +8,8 @@ Host a small server that launches a big minecraft server and redirects the playe
 - [X] else, assign beacon server's IP to the domain
 
 ### node-minecraft-protocol server
-- [ ] detects when a user tries to connect to the beacon server in Minecraft, and boots the main server EC2 instance using aws-cli
-- [ ] disconnects the player with the message that the main server is booting
+- [x] detects when a user tries to connect to the beacon server in Minecraft, and boots the main server EC2 instance using aws-cli
+- [x] disconnects the player with the message that the main server is booting
 
 ## main server
 ### MC Server
