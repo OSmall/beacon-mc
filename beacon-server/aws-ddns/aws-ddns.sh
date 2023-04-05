@@ -30,7 +30,7 @@ while [ 1 ] ; do
     OLD_IP="$(dig +short "$DNS_FQDN")"
 	THIS_IP="$(curl -sS --max-time 5 https://api.ipify.org)"
 
-    AWS_QUERY="$(aws ec2 describe-instances --profile mc --instance-ids i-01f3db93eb12594a6 --query 'Reservations[0].Instances[0].[State.Name,PublicIpAddress]' --output text)"
+    AWS_QUERY="$(aws ec2 describe-instances --profile mc --instance-ids <INSTANCE_ID> --query 'Reservations[0].Instances[0].[State.Name,PublicIpAddress]' --output text)"
     IFS=' ' read -r MC_STATUS MC_IP <<< $AWS_QUERY # split the query into the status and the IP
 
     if ! validate_ip "$OLD_IP" ; then
@@ -87,7 +87,7 @@ while [ 1 ] ; do
 			}
 		]
 	}
-EOF
+	EOF
 
 	echo "Updating IP to: $NEW_IP ($DNS_FQDN); OLD=$OLD_IP"
 
