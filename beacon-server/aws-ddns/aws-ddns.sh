@@ -87,7 +87,7 @@ while [ 1 ] ; do
 			}
 		]
 	}
-	EOF
+EOF
 
 	echo "Updating IP to: $NEW_IP ($DNS_FQDN); OLD=$OLD_IP"
 
