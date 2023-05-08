@@ -1,5 +1,5 @@
 [Unit]
-Description=node-minecraft-protocol beacon server to boot up main Minecraft server AWS EC2 instance when player joins.
+Description=node-minecraft-protocol.
 After=network.target
 
 [Service]
