@@ -1,8 +1,8 @@
 export interface HostData {
 	awsInstanceId: string,
 	lastBoot: number, // milliseconds
-	bootDuration: number, // milliseconds
 	lastEmpty: number,
+	bootDuration: number, // milliseconds
 }
 
 export interface HostObject {

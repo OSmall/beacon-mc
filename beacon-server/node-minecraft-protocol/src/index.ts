@@ -1,7 +1,7 @@
 #!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
 
-import mc from 'minecraft-protocol';
-import { EC2Client, StartInstancesCommand } from "@aws-sdk/client-ec2";
+import mc, { NewPingResult, OldPingResult } from 'minecraft-protocol';
+import { EC2Client, StartInstancesCommand, StopInstancesCommand } from "@aws-sdk/client-ec2";
 import { ec2Config, hosts } from "./sensitive";
 import { beaconMotd, errTimeout, timeout } from './config';
 
@@ -28,9 +28,9 @@ server.on('login', (client: mc.ServerClient) => {
 		return;
 	}
 
-	const startCommand = new StartInstancesCommand({ "InstanceIds": [hosts[hostName].awsInstanceId] });
+	const startCommand = new StartInstancesCommand({ InstanceIds: [hosts[hostName].awsInstanceId] });
 
-	if (Date.now() > hosts[hostName].lastBoot + hosts[hostName].bootDuration * 1000) {
+	if (Date.now() > hosts[hostName].lastBoot + hosts[hostName].bootDuration) {
 		ec2Client.send(startCommand).then(() => console.log(`Booting ${hostName} EC2 instance`));
 		hosts[hostName].lastBoot = Date.now();
 	}
@@ -49,16 +49,34 @@ server.on('listening', function () {
 
 // ----Empty Server----
 
-function checkServer(host: string)  {
-	console.log(host);
-	mc.ping({ host: host }, (_err, result) => {
+function checkServer(hostName: string)  {
+	const stopCommand = new StopInstancesCommand({ InstanceIds: [hosts[hostName].awsInstanceId] });
+
+	console.log(hostName);
+	mc.ping({ host: hostName }, (_err, result) => {
+		if (!result) return;
 		console.log(result);
+		
 		// TODO: shut off server when empty
+		// get current player count
+		let playerCount: number;
+		if ((result as NewPingResult).players?.online !== undefined)
+			playerCount = (result as NewPingResult).players?.online;
+		else if ((result as OldPingResult).playerCount !== undefined)
+			playerCount = (result as OldPingResult).playerCount;
+		else
+			throw new Error("Unable to get player count");
+
+		if (playerCount === 0) hosts[hostName].lastEmpty = Date.now();
+
+		// if (Date.now() > hosts[hostName].lastEmpty + )
+		
+
 	}).then(() => {
-		setTimeout(() => checkServer(host), timeout);
+		setTimeout(() => checkServer(hostName), timeout);
 	}).catch((err) => {
 		console.error(err);
-		setTimeout(() => checkServer(host), errTimeout);
+		setTimeout(() => checkServer(hostName), errTimeout);
 	});
 }
 
