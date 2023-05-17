@@ -6,6 +6,7 @@ export const hosts: HostObject = {
 	'<MC_HOST_NAME>': {
 		awsInstanceId: '<MC_AWS_EC2_ID>',
 		lastBoot: 0,
+		lastEmpty: 0,
 		bootDuration: 60*1000,
 	}, // add more hosts to monitor here
 }
