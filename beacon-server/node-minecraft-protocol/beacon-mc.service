@@ -1,10 +1,10 @@
 [Unit]
-Description=node-minecraft-protocol.
+Description=node-minecraft-protocol
 After=network.target
 
 [Service]
 WorkingDirectory=/opt/beacon-mc
-ExecStart=/opt/beacon-mc/index.js
+ExecStart=/opt/beacon-mc/dist/index.js
 User=ec2-user
 Group=ec2-user
 Restart=on-failure
