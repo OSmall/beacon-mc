@@ -3,39 +3,39 @@
 import mc from 'minecraft-protocol';
 import { EC2Client, StartInstancesCommand } from "@aws-sdk/client-ec2";
 import { ec2Config, hosts } from "./sensitive";
-import { dnsTtl, errTimeout, timeout } from './config';
+import { beaconMotd, errTimeout, timeout } from './config';
 
 const ec2Client = new EC2Client(ec2Config);
 
 const server = mc.createServer({
-	motd: 'sleepy server... join to boot',
+	motd: beaconMotd,
 	maxPlayers: 0,
 	port: 25565,
 	version: false, // works for all mc versions
 });
 
 server.on('login', (client: mc.ServerClient) => {
-	const addr = client.socket.remoteAddress + ':' + client.socket.remotePort;
-	console.log(client.username + ' connected', '(' + addr + ')');
-
 	client.on('end', () => {
 		console.log(client.username + ' disconnected', '(' + addr + ')');
 	});
 
+	const addr = client.socket.remoteAddress + ':' + client.socket.remotePort;
+	console.log(client.username + ' connected', '(' + addr + ')');
+	
 	let hostName = client.serverHost.split('\0')[0];
-
 	if (hostName === undefined) {
-		client.end(`Error, wrong host name`);
+		client.end(`Error, host name undefined`);
 		return;
 	}
 
-	if (Date.now() > hosts[hostName].lastBoot + dnsTtl * 1000) {
-		const command = new StartInstancesCommand({ "InstanceIds": [hosts[hostName].awsInstanceId] });
-		ec2Client.send(command).then(() => console.log(`Booting ${hostName} EC2 instance`));
+	const startCommand = new StartInstancesCommand({ "InstanceIds": [hosts[hostName].awsInstanceId] });
+
+	if (Date.now() > hosts[hostName].lastBoot + hosts[hostName].bootDuration * 1000) {
+		ec2Client.send(startCommand).then(() => console.log(`Booting ${hostName} EC2 instance`));
 		hosts[hostName].lastBoot = Date.now();
 	}
 
-	client.end(`Server booting now... try again in around ${dnsTtl} seconds`);
+	client.end(`Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
 });
 
 server.on('error', function (error) {
