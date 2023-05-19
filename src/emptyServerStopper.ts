@@ -23,8 +23,6 @@ function stopEC2(hostName: string) {
 }
 
 function handlePing(hostName: string, pingResult: OldPingResult | NewPingResult): void {
-	console.log(hostName, pingResult);
-
 	// set time that the server last had at least one player in it
 	let playerCount = getPlayerCount(pingResult);
 	if (playerCount !== 0 || (pingResult as NewPingResult).players.max === 0) hosts[hostName].lastOccupied = Date.now(); // TODO check based on AWS EC2 instance state
