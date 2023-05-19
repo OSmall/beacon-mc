@@ -24,7 +24,7 @@ function startEC2(hostName: string, client: mc.ServerClient) {
   hosts[hostName].lastBoot = Date.now();
 }
 
-function handleServerLogin(client: mc.ServerClient) {
+function handleServerLogin(client: mc.ServerClient & {serverHost: string}) {
   // consts
   const addr = client.socket.remoteAddress + ':' + client.socket.remotePort;
   const hostName = client.serverHost?.split('\0')[0];
@@ -51,21 +51,21 @@ function handleServerLogin(client: mc.ServerClient) {
 }
 
 export function startBeaconServer() {
-  const server = mc.createServer({
+  const server: mc.Server & {socketServer?: any} = mc.createServer({
     motd: beaconMotd,
     maxPlayers: 0,
     port: beaconPort,
     version: false, // works for all mc versions
   });
 
-  server.on('login', handleServerLogin);
+  server.on('login', (client) => handleServerLogin(client as mc.ServerClient & {serverHost: string}));
 
   server.on('error', function (error) {
     console.error('Error:', error);
   });
 
   server.on('listening', function () {
-    console.log('Server listening on port', server.socketServer.address().port);
+    console.log('Server listening on port', server.socketServer?.address?.()?.port);
   });
 }
 
