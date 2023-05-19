@@ -1,5 +1,5 @@
 export interface HostConfig { // these must be given by the user
-	awsInstanceId: string,
+	ec2InstanceId: string,
 	bootDuration: number, // seconds to wait between sending start signals
 	idleTime: number, // seconds before sending stop signal
 }

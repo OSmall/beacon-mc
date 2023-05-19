@@ -13,15 +13,17 @@ function verifyHostName(hostName: string) {
 }
 
 function startEC2(hostName: string, client: mc.ServerClient) {
-  const startCommand = new StartInstancesCommand({ InstanceIds: [hosts[hostName].awsInstanceId] });
-  ec2Client.send(startCommand).then(() =>
-    console.log(`Booting ${hostName} EC2 instance`)
-  ).then(() =>
-    client.end(`Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`)
-  ).catch((error) => {
+  const startCommand = new StartInstancesCommand({ InstanceIds: [hosts[hostName].ec2InstanceId] });
+  
+  ec2Client.send(startCommand).then(() => {
+    console.log(`Booting ${hostName} EC2 instance`);
+  }).then(() => {
+    client.end(`Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
+  }).catch((error) => {
     console.error(error);
     client.end('beacon-mc: AWS ID rejected');
   });
+
   hosts[hostName].lastBoot = Date.now();
 }
 

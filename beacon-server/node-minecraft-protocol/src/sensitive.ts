@@ -4,7 +4,7 @@ import { fromIni } from "@aws-sdk/credential-providers";
 
 export const hostConfig: HostConfigObject = {
 	'<MC_HOST_NAME>': {
-		awsInstanceId: '<MC_AWS_EC2_ID>',
+		ec2InstanceId: '<MC_AWS_EC2_ID>',
 		bootDuration: 60,
 		idleTime: 60 * 10,
 	}, // add more hosts to monitor here
