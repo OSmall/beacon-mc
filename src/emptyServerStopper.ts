@@ -27,7 +27,7 @@ function handlePing(hostName: string, pingResult: OldPingResult | NewPingResult)
 
 	// set time that the server last had at least one player in it
 	let playerCount = getPlayerCount(pingResult);
-	if (playerCount !== 0) hosts[hostName].lastOccupied = Date.now();
+	if (playerCount !== 0 || (pingResult as NewPingResult).players.max === 0) hosts[hostName].lastOccupied = Date.now(); // TODO check based on AWS EC2 instance state
 
 	if (Date.now() > hosts[hostName].lastOccupied + hosts[hostName].idleTime * 1000) {
 		try {
