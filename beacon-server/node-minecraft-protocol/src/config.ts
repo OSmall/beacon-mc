@@ -1,3 +1,4 @@
-export const timeout = 5000;
-export const errTimeout = 60000;
-export const beaconMotd = 'sleepy server... join to boot';
+export const timeout: number = 5000;
+export const errTimeout: number = 60000;
+export const beaconMotd: string = 'sleepy server... join to boot';
+export const beaconPort: number = 25565;
