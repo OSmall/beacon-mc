@@ -1,5 +1,5 @@
 [Unit]
-Description=node-minecraft-protocol
+Description=beacon-mc server
 After=network.target
 
 [Service]
@@ -11,4 +11,3 @@ Restart=on-failure
 
 [Install]
 WantedBy=default.target
-
