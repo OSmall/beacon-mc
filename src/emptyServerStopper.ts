@@ -16,7 +16,7 @@ function stopEC2(hostName: string) {
 	const stopCommand = new StopInstancesCommand({ InstanceIds: [hosts[hostName].ec2InstanceId] });
 
 	ec2Client.send(stopCommand).then(() => {
-		console.log(`Booting ${hostName} EC2 instance`);
+		console.log(`Stopping ${hostName} EC2 instance`);
 	}).catch((error) => {
 		console.error(new Error("EC2 instance won't stop. ID rejected", { cause: error }));
 	});
