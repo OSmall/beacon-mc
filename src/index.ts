@@ -1,4 +1,4 @@
-#!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
+#!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/npx tsc && /home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
 
 import { ec2Config, hostConfig } from "./sensitive";
 import { HostObject, hostConfigObjectToHostObject } from './types';
