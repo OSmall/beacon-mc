@@ -38,8 +38,6 @@ function handlePing(hostName: string, pingResult: OldPingResult | NewPingResult)
 }
 
 function handlePingError(hostName: string) {
-	console.log(hostName, 'offline');
-
 	// set last occupied time to now because we don't want to send the EC2 stop command when the server is off
 	hosts[hostName].lastOccupied = Date.now();
 }
