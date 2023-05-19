@@ -1,9 +1,7 @@
 import mc from 'minecraft-protocol';
-import { EC2Client, StartInstancesCommand } from "@aws-sdk/client-ec2";
-import { ec2Config, hosts } from "./index";
+import { StartInstancesCommand } from "@aws-sdk/client-ec2";
+import { ec2Client, hosts } from "./index";
 import { beaconMotd, beaconPort } from "./config";
-
-const ec2Client = new EC2Client(ec2Config);
 
 function verifyHostName(hostName: string) {
   if (hostName === undefined)
@@ -14,14 +12,13 @@ function verifyHostName(hostName: string) {
 
 function startEC2(hostName: string, client: mc.ServerClient) {
   const startCommand = new StartInstancesCommand({ InstanceIds: [hosts[hostName].ec2InstanceId] });
-  
+
   ec2Client.send(startCommand).then(() => {
     console.log(`Booting ${hostName} EC2 instance`);
-  }).then(() => {
     client.end(`Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
   }).catch((error) => {
-    console.error(error);
-    client.end('beacon-mc: AWS ID rejected');
+    client.end('beacon-mc: EC2 instance id rejected');
+    console.error(new Error("EC2 instance won't start. ID rejected", { cause: error }));
   });
 
   hosts[hostName].lastBoot = Date.now();
