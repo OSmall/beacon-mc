@@ -1,6 +1,6 @@
 #!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/npx tsc && /home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
 
-import { ec2Config, hostConfig, route53Config } from "./sensitive";
+import { ec2Config, hostConfig, route53Config } from "./sensitive0";
 import { HostObject, hostConfigObjectToHostObject } from './types';
 import { EC2Client } from "@aws-sdk/client-ec2";
 import { Route53Client } from "@aws-sdk/client-route-53";
