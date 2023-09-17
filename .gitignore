@@ -131,3 +131,5 @@ dist
 
 # Private host data
 **/sensitive0*
+
+.vscode/**

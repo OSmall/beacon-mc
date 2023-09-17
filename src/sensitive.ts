@@ -12,8 +12,8 @@ export const hostConfig: HostConfigObject = {
 };
 
 export const ec2Config: EC2ClientConfig = {
-  region: "<AWS_REGION>",
-  credentials: fromIni(),
+	region: "<AWS_REGION>",
+	credentials: fromIni(),
 };
 
 export const route53Config: Route53ClientConfig = {
