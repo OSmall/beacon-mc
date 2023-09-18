@@ -1,4 +1,4 @@
-import { HostConfigObject } from "./types";
+import { HostConfigObject } from "./types.js";
 import { EC2ClientConfig } from "@aws-sdk/client-ec2";
 import { Route53ClientConfig } from "@aws-sdk/client-route-53";
 import { fromIni } from "@aws-sdk/credential-providers";

@@ -1,7 +1,7 @@
 import mc, { NewPingResult, OldPingResult } from "minecraft-protocol";
-import { ec2Client, hosts } from "./index";
+import { ec2Client, hosts } from "./index.js";
 import { StopInstancesCommand } from "@aws-sdk/client-ec2";
-import { errTimeout, timeout } from "./config";
+import { errTimeout, timeout } from "./config.js";
 
 function getPlayerCount(pingResult: OldPingResult | NewPingResult): number {
 	if ((pingResult as NewPingResult)?.players?.online !== undefined)

@@ -1,7 +1,7 @@
 import mc from 'minecraft-protocol';
 import { StartInstancesCommand } from "@aws-sdk/client-ec2";
-import { ec2Client, hosts } from "./index";
-import { beaconMotd, beaconPort } from "./config";
+import { ec2Client, hosts } from "./index.js";
+import { beaconMotd, beaconPort } from "./config.js";
 
 function verifyHostName(hostName: string) {
   if (hostName === undefined)
