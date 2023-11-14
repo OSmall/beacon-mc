@@ -1,5 +1,7 @@
+import { VirtualServer } from "./virtualServer.js";
+
 export interface HostConfig { // these must be given by the user
-	ec2InstanceId: string,
+	virtualServer: VirtualServer,
 	bootDuration: number, // seconds to wait between sending start signals
 	idleTime: number, // seconds before sending stop signal
 }

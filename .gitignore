@@ -133,3 +133,5 @@ dist
 **/sensitive0*
 
 .vscode/**
+
+.DS_Store
