@@ -1,6 +1,7 @@
 import mc, { NewPingResult, OldPingResult } from "minecraft-protocol";
 import { hosts } from "./index.js";
 import { errTimeout, timeout } from "./config.js";
+import { fetchBeaconIP } from "./ddns.js";
 
 function getPlayerCount(pingResult: OldPingResult | NewPingResult): number {
 	if ((pingResult as NewPingResult)?.players?.online !== undefined)
@@ -17,8 +18,14 @@ function handlePing(hostName: string, pingResult: OldPingResult | NewPingResult)
 	if (playerCount !== 0 || (pingResult as NewPingResult).players.max === 0) hosts[hostName].lastOccupied = Date.now(); // TODO check based on AWS EC2 instance state
 
 	// stop server
-	if (Date.now() > hosts[hostName].lastOccupied + hosts[hostName].idleTime * 1000)
-		hosts[hostName].virtualServer.stop();
+	if (Date.now() > hosts[hostName].lastOccupied + hosts[hostName].idleTime * 1000) {
+		hosts[hostName].virtualServer.stop().then(() => {
+			// update DNS to Beacon IP
+			fetchBeaconIP().then((beaconIP) => {
+				hosts[hostName].dns.update(beaconIP);
+			});
+		});
+	}
 }
 
 function handlePingError(hostName: string) {

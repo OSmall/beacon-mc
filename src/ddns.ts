@@ -1,21 +1,21 @@
-import { Resolver, promises } from "dns";
+import { promises } from "dns";
 import { hosts } from "./index.js";
 
-const dnsTimeout = 10 * 1000;
+const dnsTimeout = 60 * 1000;
 
 
 function fetchDnsIP(hostName: string) {
 	promises.setServers(['1.1.1.1']);
-	return promises.resolve4(hostName).then(res => res[0]);
+	return promises.resolve4(hostName).then(res => res[0]).catch(console.error);
 }
-function fetchVpsIP(hostName: string) {
+export function fetchVpsIP(hostName: string) {
 	return hosts[hostName].virtualServer.getIP();
 }
-function fetchBeaconIP() {
+export function fetchBeaconIP() {
 	return fetch('https://api.ipify.org').then(res => res.text());
 }
 
-async function checkStarted(hostName: string) {
+async function checkStarted(hostName: string) { // TODO validate IPs
 	// DNS record needs to point to VPS
 	const dnsIP = await fetchDnsIP(hostName);
 	const vpsIP = await fetchVpsIP(hostName);
@@ -56,9 +56,12 @@ async function checkDns(hostName: string) {
 	}
 }
 
+function repeatedCheckDns(hostName: string) {
+	checkDns(hostName).then(() => {
+		setTimeout(() => repeatedCheckDns(hostName), dnsTimeout);
+	});
+}
+
 export default function ddns() {
-	setInterval(() => {
-		fetchBeaconIP();
-		Object.keys(hosts).forEach(checkDns);
-	}, dnsTimeout);
+	Object.keys(hosts).forEach(repeatedCheckDns);
 }

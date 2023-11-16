@@ -1,6 +1,7 @@
 import mc from 'minecraft-protocol';
 import { hosts } from "./index.js";
 import { beaconMotd, beaconPort } from "./config.js";
+import { fetchVpsIP } from './ddns.js';
 
 function verifyHostName(hostName: string) {
 	if (hostName === undefined)
@@ -33,6 +34,11 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 	if (Date.now() > hosts[hostName].lastBoot + hosts[hostName].bootDuration * 1000) {
 		hosts[hostName].virtualServer.start().then(() => {
 			client.end(`beacon-mc: Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
+			
+			// update DNS to VPS IP
+			fetchVpsIP(hostName).then((vpsIP) => {
+				hosts[hostName].dns.update(vpsIP);
+			});
 		}).catch(() => {
 			client.end('beacon-mc: error: unable to start virtual server');
 		});
