@@ -44,6 +44,8 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 		});
 
 		hosts[hostName].lastBoot = Date.now();
+	} else {
+		client.end('beacon-mc: Server still booting... try again soon');
 	}
 }
 
