@@ -1,5 +1,6 @@
 import { promises } from "dns";
 import { hosts } from "./index.js";
+import fetch from "node-fetch";
 
 const dnsTimeout = 60 * 1000;
 
