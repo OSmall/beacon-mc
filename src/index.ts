@@ -1,6 +1,6 @@
 #!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/npx tsc && /home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
 
-import { hostConfig } from "./sensitive0.js";
+import { hostConfig } from "./sensitive.js";
 import { HostObject, hostConfigObjectToHostObject } from './types.js';
 import emptyServerStopper from './emptyServerStopper.js';
 import startBeaconServer from "./beacon.js";

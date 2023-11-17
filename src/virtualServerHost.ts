@@ -1,5 +1,5 @@
 import { DescribeInstanceStatusCommand, DescribeInstancesCommand, EC2Client, InstanceStateName, StartInstancesCommand, StopInstancesCommand } from "@aws-sdk/client-ec2";
-import { ec2Config } from "./sensitive0.js";
+import { ec2Config } from "./sensitive.js";
 
 export interface VirtualServerHost {
 	start(): Promise<Object>;

@@ -1,5 +1,5 @@
 import { ChangeResourceRecordSetsCommand, ListResourceRecordSetsCommand, Route53Client } from "@aws-sdk/client-route-53";
-import { route53Config } from "./sensitive0.js";
+import { route53Config } from "./sensitive.js";
 
 const DNS_TTL = 60;
 
