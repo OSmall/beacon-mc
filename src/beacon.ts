@@ -36,9 +36,9 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 			client.end(`beacon-mc: Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
 			
 			// update DNS to VPS IP
-			fetchVpsIP(hostName).then((vpsIP) => {
+			setTimeout(() => fetchVpsIP(hostName).then((vpsIP) => { // TODO change to an event-based system responding to AWS EC2 state changes using EventBridge https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-events/#description 
 				hosts[hostName].dns.update(vpsIP);
-			});
+			}), 5000);
 		}).catch(() => {
 			client.end('beacon-mc: error: unable to start virtual server');
 		});
