@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/opt/beacon-mc
-ExecStart=/opt/beacon-mc/dist/index.js
+ExecStart=/opt/beacon-mc/dist/index
 User=ec2-user
 Group=ec2-user
 Restart=on-failure
