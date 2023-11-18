@@ -2,7 +2,7 @@ import { promises } from "dns";
 import { hosts } from "./index.js";
 import fetch from "node-fetch";
 
-const dnsTimeout = 60 * 1000;
+const dnsTimeout = 60 * 1000; // TODO: move this to config
 
 
 function fetchDnsIP(hostName: string) {

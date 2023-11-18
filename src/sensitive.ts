@@ -28,4 +28,4 @@ export const route53Config: Route53ClientConfig = {
 export const cloudflareConfig: AuthObject = {
     email: '<AUTH_EMAIL>',
     token: '<AUTH_TOKEN>',
-}
+};
