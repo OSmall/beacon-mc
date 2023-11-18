@@ -13,7 +13,7 @@ class EC2Singleton {
 	private constructor() { }
 	public static get instance() {
 		if (this._instance === undefined)
-			this._instance = new EC2Client(ec2Config)
+			this._instance = new EC2Client(ec2Config);
 		return this._instance;
 	}
 }
