@@ -17,8 +17,10 @@ function handlePing(hostName: string, pingResult: OldPingResult | NewPingResult)
 	let playerCount = getPlayerCount(pingResult);
 	if (playerCount !== 0 || (pingResult as NewPingResult).players.max === 0) hosts[hostName].lastOccupied = Date.now(); // TODO check based on AWS EC2 instance state
 
-	// stop server
 	if (Date.now() > hosts[hostName].lastOccupied + hosts[hostName].idleTime * 1000) {
+		console.log(`${hostName} has been idle for ${hosts[hostName].idleTime} seconds... stopping server`);
+		
+		// stop server
 		hosts[hostName].virtualServer.stop().then(() => {
 			// update DNS to Beacon IP
 			fetchBeaconIP().then((beaconIP) => {
