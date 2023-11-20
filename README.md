@@ -28,10 +28,7 @@ Host a small server that launches a big minecraft server and redirects the playe
 ### AFK+ Plugin
 
 - [x] [plugin link][AFK+]
-
-### EmptyServerStopper Plugin
-
-- [x] [plugin link][EmptyServerStopper]
+- [x] Can also use `player-idle-timeout` option in `server.properties`
 
 ### SFTP Server
 
@@ -43,4 +40,3 @@ Host a small server that launches a big minecraft server and redirects the playe
 - [ ] perhaps this can be completed by looking at signals
 
 [AFK+]: https://www.spigotmc.org/resources/afk.35065/
-[EmptyServerStopper]: https://www.spigotmc.org/resources/emptyserverstopper.19409/
