@@ -4,7 +4,7 @@ import Cloudflare from "cloudflare";
 
 const DNS_TTL = 60; // TODO: move this to config
 
-export interface DNSHost {
+export interface DNSProvider {
     update(ip: string): Promise<Object>;
 }
 
@@ -18,7 +18,7 @@ class Route53Singleton {
     }
 }
 
-export class AWSRoute53DNS implements DNSHost {
+export class AWSRoute53DNS implements DNSProvider {
     readonly zoneId: string;
     readonly fqdn: string;
 
@@ -65,7 +65,7 @@ class CloudflareSingleton {
     }
 }
 
-export class CloudflareDNS implements DNSHost {
+export class CloudflareDNS implements DNSProvider {
     readonly zoneId: string;
     readonly recordId: string;
     readonly fqdn: string;

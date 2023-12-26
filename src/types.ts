@@ -1,9 +1,9 @@
-import { DNSHost } from "./dnsHost.js";
-import { VirtualServerHost } from "./virtualServerHost.js";
+import { DNSProvider } from "./dnsProvider.js";
+import { VPSProvider } from "./vpsProvider.js";
 
 export interface HostConfig { // these must be given by the user
-	virtualServer: VirtualServerHost;
-	dns: DNSHost;
+	virtualServer: VPSProvider;
+	dns: DNSProvider;
 	bootDuration: number; // seconds to wait between sending start signals
 	idleTime: number; // seconds before sending stop signal
 }

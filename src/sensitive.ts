@@ -1,6 +1,6 @@
 import { HostConfigObject } from "./types.js";
-import { AwsEc2 } from "./virtualServerHost.js";
-import { AWSRoute53DNS, CloudflareDNS } from "./dnsHost.js";
+import { AwsEc2 } from "./vpsProvider.js";
+import { AWSRoute53DNS, CloudflareDNS } from "./dnsProvider.js";
 import { EC2ClientConfig } from "@aws-sdk/client-ec2";
 import { Route53ClientConfig } from "@aws-sdk/client-route-53";
 import { fromIni } from "@aws-sdk/credential-providers";

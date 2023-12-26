@@ -1,7 +1,7 @@
 import { DescribeInstanceStatusCommand, DescribeInstancesCommand, EC2Client, InstanceStateName, StartInstancesCommand, StopInstancesCommand } from "@aws-sdk/client-ec2";
 import { ec2Config } from "./sensitive.js";
 
-export interface VirtualServerHost {
+export interface VPSProvider {
 	start(): Promise<Object>;
 	stop(): Promise<Object>;
 	getState(): Promise<InstanceStateName>;
@@ -18,7 +18,7 @@ class EC2Singleton {
 	}
 }
 
-export class AwsEc2 implements VirtualServerHost {
+export class AwsEc2 implements VPSProvider {
 	readonly instanceId: string;
 
 	constructor(instanceId: string) {
