@@ -39,7 +39,8 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 			setTimeout(() => fetchVpsIP(hostName).then((vpsIP) => { // TODO change to an event-based system responding to AWS EC2 state changes using EventBridge https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-events/#description 
 				hosts[hostName].dns.update(vpsIP);
 			}), 5000);
-		}).catch(() => {
+		}).catch((reason) => {
+			console.error("unable to start virtual server", reason);
 			client.end('beacon-mc: error: unable to start virtual server');
 		});
 
@@ -55,12 +56,25 @@ export function startBeaconServer() {
 		maxPlayers: 0,
 		port: beaconPort,
 		version: false, // works for all mc versions
+		"online-mode": false,
 	});
 
-	server.on('login', (client) => handleServerLogin(client as mc.ServerClient & { serverHost: string }));
+	server.on('playerJoin', (client) => handleServerLogin(client as mc.ServerClient & { serverHost: string }));
+
+	server.on('login', (client) => {
+		console.log('login event:', client);
+	});
+
+	server.on('connection', (client) => {
+		console.log('connection event:', client);
+	});
+
+	server.on('playerJoin', (client) => {
+		console.log('playerJoin event:', client);
+	});
 
 	server.on('error', function (error) {
-		console.error('node-minecraft-protocol:', error);
+		console.error('error event:', error);
 	});
 
 	server.on('listening', function () {
