@@ -33,7 +33,7 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 	// if enough time has passed since the last boot, start the virtual server
 	if (Date.now() > hosts[hostName].lastBoot + hosts[hostName].bootDuration * 1000) {
 		hosts[hostName].virtualServer.start().then(() => {
-			client.end(`beacon-mc: Server booting now... try again in around ${hosts[hostName].bootDuration} seconds`);
+			client.end(`beacon-mc//server_booting_now...try_again_in_around_${hosts[hostName].bootDuration}_seconds`);
 			
 			// update DNS to VPS IP
 			setTimeout(() => fetchVpsIP(hostName).then((vpsIP) => { // TODO change to an event-based system responding to AWS EC2 state changes using EventBridge https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-events/#description 
@@ -41,13 +41,15 @@ function handleServerLogin(client: mc.ServerClient & { serverHost: string }) {
 			}), 5000);
 		}).catch((reason) => {
 			console.error("unable to start virtual server", reason);
-			client.end('beacon-mc: error: unable to start virtual server');
+			client.end('beacon-mc//error//unable_to_start_virtual_server');
 		});
 
 		hosts[hostName].lastBoot = Date.now();
 	} else {
-		client.end('beacon-mc: Server still booting... try again soon');
+		client.end('beacon-mc//server_still_booting...try_again_soon');
 	}
+
+	console.log("successful user login completed!");
 }
 
 export function startBeaconServer() {
@@ -59,7 +61,7 @@ export function startBeaconServer() {
 		"online-mode": false,
 	});
 
-	server.on('playerJoin', (client) => handleServerLogin(client as mc.ServerClient & { serverHost: string }));
+	server.on('login', (client) => handleServerLogin(client as mc.ServerClient & { serverHost: string }));
 
 	server.on('login', (client) => {
 		console.log('login event:', client);
