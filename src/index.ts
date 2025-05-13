@@ -1,4 +1,4 @@
-#!/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node
+#!/usr/bin/env node
 import { hostConfig } from "./sensitive.js";
 import { HostObject, hostConfigObjectToHostObject } from './types.js';
 import emptyServerStopper from './emptyServerStopper.js';
